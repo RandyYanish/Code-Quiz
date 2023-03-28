@@ -1,0 +1,103 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h3 {
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
+
+.high-scores {
+    width: 100px;
+    height: 40px;
+}
+
+.timer {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 32px;
+    width: 100px;
+    height: auto;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div div {
+    border: 1px grey solid;
+    width: 1080px;
+    height: 30rem;
+}
+
+.start-game {
+    font-family: 'Franklin Gothic Medium', sans-serif;
+    margin-top: 150px;
+    background-color: blueviolet;
+    color: white;
+    width: 400px;
+    height: 300px;
+    font-size: 60px;
+    text-decoration: underline 5px;
+}
+
+.centered {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 1024px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .high-scores {
+        font-size: 12px;
+        width: 80px;
+        height: 30px;
+    }
+    .timer {
+        font-size: 24px;
+    }
+    .start-game {
+        width: 350px;
+        height: 250px;
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    .high-scores {
+        font-size: 12px;
+        width: 80px;
+        height: 30px;
+    }
+    .timer {
+        font-size: 24px;
+    }
+    .start-game {
+        width: 300px;
+        height: 200px;
+        font-size: 40px;
+    }
+}
