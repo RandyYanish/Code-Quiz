@@ -12,11 +12,6 @@
 var timer = document.querySelector(".timer")
 timer = startTimer(300)
 
-function startTimer(n) {
-    for (timer < 300)
-
-}
-
 
 
 function showQuestions() {
