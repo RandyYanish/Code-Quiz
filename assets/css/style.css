@@ -19,13 +19,6 @@ header {
     height: 70px;
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 h1 {
     font-size: 3rem;
 }
