@@ -1,3 +1,9 @@
+:root {
+    --main-color: #8a2be2;
+    --secondary-color: #be9304c5;
+    --secondary-text: #f5f5f5;
+}
+
 * {
     margin: 0px;
     padding: 0px;
@@ -8,23 +14,52 @@ header {
     justify-content: space-around;
     align-items: center;
     margin: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    height: 70px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 h1 {
     font-size: 3rem;
 }
 
+h2 {
+    text-align: center;
+    margin-top: 80px;
+}
+
 h3 {
+    margin-top: 80px;
     text-align: center;
 }
 
 .hide {
-    display: none;
+    display: none !important;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .high-scores {
     width: 100px;
     height: 40px;
+    background-color: var(--main-color);
+    color: var(--secondary-text);
+}
+
+.high-scores:hover {
+    background-color: #2f015a;
+    transition: 350ms ease-in-out;
 }
 
 .timer {
@@ -34,27 +69,72 @@ h3 {
     height: auto;
 }
 
-main {
+#ending-card {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-top: 80px;
 }
 
-div div {
-    border: 1px grey solid;
+#ending-card div {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: auto;
+}
+
+#ending-card div input {
+    height: 20px;
+    width: fit-content;
+    border-radius: 2px;
+}
+
+#submit-score {
+    background-color: var(--main-color);
+    color: var(--secondary-text);
+    height: 25px;
+    width: 90px;
+}
+
+#starter-card div {
+    margin-top: 100px;
     width: 1080px;
     height: 30rem;
 }
 
-.start-game {
+#start-game {
     font-family: 'Franklin Gothic Medium', sans-serif;
-    margin-top: 150px;
-    background-color: blueviolet;
-    color: white;
+    background-color: var(--main-color);
+    color: white;   
     width: 400px;
     height: 300px;
     font-size: 60px;
     text-decoration: underline 5px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    border: none;
+    border-radius: 10px;
+    color: var(--secondary-text);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+  
+#start-game::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: -1;
+    border-radius: 10px;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+  
+#start-game:hover::before {
+    opacity: 1;
+    animation: breathing 1.5s ease-in-out infinite;
 }
 
 .centered {
@@ -62,11 +142,29 @@ div div {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.choice {
+    background-color: var(--secondary-color);
+    width: 75%;
+    margin-inline: 11%;
+    margin-top: 5px;
+    height: auto;
+    font-size: 20px;
+}
+
+.score {
+    font-size: 30px;
+    margin-bottom: 10px;
 }
 
 @media screen and (max-width: 1024px) {
     h1 {
         font-size: 2rem;
+    }
+    h3 {
+        font-size: 1rem;
     }
     .high-scores {
         font-size: 12px;
@@ -85,12 +183,13 @@ div div {
 
 @media screen and (max-width: 768px) {
     h1 {
+        display: none;
         font-size: 1.5rem;
     }
     .high-scores {
-        font-size: 12px;
-        width: 80px;
-        height: 30px;
+        font-size: 14px;
+        width: 100px;
+        height: 40px;
     }
     .timer {
         font-size: 24px;
@@ -99,5 +198,17 @@ div div {
         width: 300px;
         height: 200px;
         font-size: 40px;
+    }
+}
+
+@keyframes breathing {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+    transform: scale(1);
     }
 }
