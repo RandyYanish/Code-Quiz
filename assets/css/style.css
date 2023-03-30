@@ -43,7 +43,7 @@ main {
     align-items: center;
 }
 
-.high-scores {
+.high-scores, .clear{
     width: 100px;
     height: 40px;
     background-color: var(--main-color);
@@ -150,6 +150,23 @@ main {
 .score {
     font-size: 30px;
     margin-bottom: 10px;
+}
+
+#list-scores {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+#high-scores-card {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.clear {
+    width: 120px;
 }
 
 @media screen and (max-width: 1024px) {

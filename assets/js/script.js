@@ -9,6 +9,8 @@ const countdownTimer = document.querySelector('.timer');
 const finalScore = document.getElementById('score')
 const submitScoreButton = document.getElementById('submit-score');
 const endCard = document.getElementById('ending-card')
+const highScoreCard = document.getElementById('high-scores-card')
+const listScores = document.getElementById('list-scores')
 
 let score = 0;
 let currentQuestionIndex = 0;
@@ -93,6 +95,9 @@ function submitScore() {
   
     // Store the high scores array in local storage
     localStorage.setItem('highScores', JSON.stringify(highScores));
+
+    // Render High Score Card
+    renderScores();
 }
 
 // Add event listener to start the quiz when the start button is clicked
@@ -123,13 +128,37 @@ function displayScore() {
     endCard.className = "show";
 };
 
+// Function to render the high score card
+function renderScores() {
+    startCard.className = "hide";
+    questionCard.className = "hide";
+    endCard.className = "hide";
+    highScoreCard.className = "show";
+
+    const scores = JSON.parse(localStorage.getItem("highScores"));
+
+    // If there are no scores in localStorage, display a message
+    if (!scores || scores.length === 0) {
+        highScoreCard.innerHTML = "<p>No high scores to display.</p>";
+        return;
+    }
+
+    // Create an HTML element for each score
+    const scoreList = document.createElement("ol");
+    scores.forEach(score => {
+        const scoreItem = document.createElement("li");
+        scoreItem.textContent = `${score.initials}: ${score.score}`;
+        scoreList.appendChild(scoreItem);
+    });
+    listScores.appendChild(scoreList);
+}
+
+
 // Add an event listener to the "start-game" button to call the startCountdown function when clicked
 startButton.addEventListener('click', startCountdown);
 
 // Function to change to High score card when button is clicked
-document.querySelector('.high-scores').addEventListener('click', displayScore);
+document.querySelector('.high-scores').addEventListener('click', renderScores);
 
 // Add an event listener to the "Submit Score" button
 submitScoreButton.addEventListener('click', submitScore);
-
-// Write the score to the html
