@@ -32,7 +32,7 @@ THEN I can save my initials and my score
 
 The following animation demonstrates the application functionality:
 
-![A user clicks through an interactive coding quiz.](./assets/images/coding-quiz-game.gif)
+![A user clicks through an interactive coding quiz.](./assets/images/code-quiz-game.gif)
 
 ## Installation
 
