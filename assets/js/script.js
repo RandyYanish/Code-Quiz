@@ -104,38 +104,44 @@ function handleAnswer(event) {
     const currentQuestion = quizQuestions[currentQuestionIndex];
     
     if (selectedChoice === currentQuestion.answer) {
-        score++;
-        finalScore.textContent = score;
-        currentQuestionIndex++;
-        if (currentQuestionIndex < quizQuestions.length) {
-        renderQuestion();
-        } else {
-        displayScore();
-        }
+
+      score++;
+      finalScore.textContent = score;
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quizQuestions.length) {
+      renderQuestion();
+      } else {
+      displayScore();
+      }
     } else {
-        timeLeft -= 5;
-        renderQuestion();
-    }
+      timeLeft -= 5;
+      renderQuestion();
+  }
 };
 
 
 // Function to submit the user's score
 function submitScore() {
-    // Get the user's initials from the input field
-    const initialsInput = document.getElementById('initials');
-    const initials = initialsInput.value;
-  
-    // Create an object to store the score and initials
-    const scoreObject = { score: score, initials: initials };
-  
-    // Add the score object to the high scores array
-    highScores.push(scoreObject);
-  
-    // Sort the high scores array in descending order by score
-    highScores.sort((a, b) => b.score - a.score);
-  
-    // Store the high scores array in local storage
-    localStorage.setItem('highScores', JSON.stringify(highScores));
+  // Get the user's initials from the input field
+  const initialsInput = document.getElementById('initials');
+  const initials = initialsInput.value;
+
+  // Create an object to store the score and initials
+  const scoreObject = { score: score, initials: initials };
+
+  // Add the score object to the high scores array
+  highScores.push(scoreObject);
+
+  // Sort the high scores array in descending order by score
+  highScores.sort((a, b) => b.score - a.score);
+
+  // Store the high scores array in local storage
+  localStorage.setItem('highScores', JSON.stringify(highScores));
+
+  // Reset game
+  currentQuestionIndex = 0;
+  score = 0;
+  timeLeft = 60;
 
   startCard.className = "show";
   endCard.className = "hide";
@@ -203,7 +209,8 @@ function renderScores() {
 // Function to clear all scores saved and rendered
 function clearAllScores() {
   // Clear highscores from local storage
-  localStorage.removeItem('highScores');
+  localStorage.clear();
+  localStorage.setItem('highScores', '');
 
   // Clear the listScores element in the HTML
   listScores.innerHTML = '';
