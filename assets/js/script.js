@@ -6,11 +6,12 @@ const startButton = document.getElementById('start-game');
 const submitButton = document.getElementById('submit-quiz');
 const startCard = document.getElementById('starter-card');
 const countdownTimer = document.querySelector('.timer');
-const finalScore = document.getElementById('score')
+const finalScore = document.getElementById('score');
 const submitScoreButton = document.getElementById('submit-score');
-const endCard = document.getElementById('ending-card')
-const highScoreCard = document.getElementById('high-scores-card')
-const listScores = document.getElementById('list-scores')
+const endCard = document.getElementById('ending-card');
+const highScoreButton = document.getElementById('high-scores');
+const listScores = document.getElementById('list-scores');
+const clearScores = document.getElementById('clear-scores');
 
 let score = 0;
 let currentQuestionIndex = 0;
@@ -29,10 +30,50 @@ const questions = [
     choices: ["2","3","4","undefined"],
     answer: "2"
   },
+  {
+    question: "Which on of these are a framework for CSS?",
+    choices: ["Undefined","QuickSand","JavScript","Bootstrap"],
+    answer: "Bootstrap"
+  },
+  {
+    question: "How do you hide an element using CSS?",
+    choices: ["display: hidden;","display: hide","display: none;","undefined"],
+    answer: "display: none;"
+  },
+  {
+    question: "An element is:",
+    choices: ["<div>","<page>","<part>","undefined"],
+    answer: "<div>"
+  },
+  {
+    question: "How do you access a websites html from your browser?",
+    choices: ["You can't","inspect","lookup","bookmark"],
+    answer: "inspect"
+  },
+  {
+    question: "How do you select an element in JavaScript?",
+    choices: ["callElement()","getElement()","document.getElementById()","undefined"],
+    answer: "document.getElementById()"
+  },
+  {
+    question: "Where can you find most of the styling of a website?",
+    choices: ["CSS","JS","HTML","undefined"],
+    answer: "CSS"
+  },
+  {
+    question: "What is the Title of this website?",
+    choices: ["Code Quiz","website","Code Quiz!","undefined"],
+    answer: "Code Quiz!"
+  },
+  {
+    question: "How can you tell your site to load your javascript at the end of the html?",
+    choices: ["defer","later","suspend","undefined"],
+    answer: "defer"
+  },
 ];
 
 // Define timeLeft at the top level
-let timeLeft = 120;
+let timeLeft = 60;
 
 // Function to start the quiz and display the first question
 function startQuiz() {
@@ -76,7 +117,7 @@ function handleAnswer(event) {
         renderQuestion();
     }
 };
-     
+
 
 // Function to submit the user's score
 function submitScore() {
@@ -96,8 +137,8 @@ function submitScore() {
     // Store the high scores array in local storage
     localStorage.setItem('highScores', JSON.stringify(highScores));
 
-    // Render High Score Card
-    renderScores();
+  startCard.className = "show";
+  endCard.className = "hide";
 }
 
 // Add event listener to start the quiz when the start button is clicked
@@ -130,35 +171,55 @@ function displayScore() {
 
 // Function to render the high score card
 function renderScores() {
-    startCard.className = "hide";
+    startCard.className = "show";
     questionCard.className = "hide";
     endCard.className = "hide";
-    highScoreCard.className = "show";
+    $('#largeModal').modal('show');
+
 
     const scores = JSON.parse(localStorage.getItem("highScores"));
 
     // If there are no scores in localStorage, display a message
     if (!scores || scores.length === 0) {
-        highScoreCard.innerHTML = "<p>No high scores to display.</p>";
+        listScores.innerHTML = "<p>No high scores to display.</p>";
+        clearScores.classList.add('invisible');
         return;
-    }
+    } else {
+      listScores.innerHTML = "";
+      clearScores.classList.remove('invisible');
+    };
 
     // Create an HTML element for each score
     const scoreList = document.createElement("ol");
     scores.forEach(score => {
         const scoreItem = document.createElement("li");
         scoreItem.textContent = `${score.initials}: ${score.score}`;
+        scoreItem.className = "list-group-item";
         scoreList.appendChild(scoreItem);
     });
     listScores.appendChild(scoreList);
-}
+};
 
+// Function to clear all scores saved and rendered
+function clearAllScores() {
+  // Clear highscores from local storage
+  localStorage.removeItem('highScores');
+
+  // Clear the listScores element in the HTML
+  listScores.innerHTML = '';
+
+  // Hide modal
+  $('#modal').modal('hide');
+};
 
 // Add an event listener to the "start-game" button to call the startCountdown function when clicked
 startButton.addEventListener('click', startCountdown);
 
-// Function to change to High score card when button is clicked
-document.querySelector('.high-scores').addEventListener('click', renderScores);
-
 // Add an event listener to the "Submit Score" button
 submitScoreButton.addEventListener('click', submitScore);
+
+// Add an event listener to the "High Scores" button
+highScoreButton.addEventListener('click', renderScores);
+
+// Add an event listener to the "Clear Scores" button
+clearScores.addEventListener('click', clearAllScores);
